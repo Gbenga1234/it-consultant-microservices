@@ -1,0 +1,17 @@
+{{define "content"}}
+<section class="page-header">
+    <h1>{{.Title}}</h1>
+    <p class="lead">{{.Tagline}}</p>
+</section>
+
+<section class="services-list">
+    {{range .Services}}
+    <article class="card">
+        <h2>{{.Name}}</h2>
+        <p>{{.Description}}</p>
+        <p class="badge">{{.Category}}</p>
+    </article>
+    {{end}}
+</section>
+{{end}}
+{{template "base" .}}

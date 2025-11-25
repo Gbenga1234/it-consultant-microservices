@@ -1,0 +1,33 @@
+{{define "content"}}
+<section class="page-header">
+    <h1>{{.Title}}</h1>
+    <p class="lead">{{if .Profile}}{{.Profile.Tagline}}{{else}}{{.Tagline}}{{end}}</p>
+</section>
+
+<section class="two-column">
+    <div>
+        <h2>Who I work with</h2>
+        <p>I partner with startups, scale-ups, and enterprises that are serious about reliability and speed. If your team wants
+        to modernize infrastructure, adopt Kubernetes, or clean up an overgrown cloud environment, I can help.</p>
+        <h2>How I work</h2>
+        <p>Engagements are practical and hands-on: I help design the architecture, implement the changes with your team,
+        and leave you with clear docs, runbooks, and repeatable automation.</p>
+    </div>
+    <div>
+        <h2>Profile</h2>
+        {{if .Profile}}
+        <p><strong>{{.Profile.Name}}</strong> — {{.Profile.Title}}</p>
+        <p class="small-meta">{{.Profile.Location}}</p>
+        <h3>Tooling & Focus Areas</h3>
+        <ul>
+            {{range .Profile.Technologies}}
+            <li>{{.}}</li>
+            {{end}}
+        </ul>
+        {{else}}
+        <p>Consultant profile information is currently unavailable.</p>
+        {{end}}
+    </div>
+</section>
+{{end}}
+{{template "base" .}}

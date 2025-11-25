@@ -1,0 +1,63 @@
+{{define "content"}}
+<section class="page-header">
+    <h1>{{.Title}}</h1>
+    <p class="lead">{{.Tagline}}</p>
+</section>
+
+<section class="contact">
+    <p>{{.Description}}</p>
+    <form class="contact-form" id="contact-form">
+        <label>
+            Name
+            <input type="text" id="name" placeholder="Your name" required />
+        </label>
+        <label>
+            Work email
+            <input type="email" id="email" placeholder="you@company.com" required />
+        </label>
+        <label>
+            Company / Team
+            <input type="text" id="company" placeholder="Company name" />
+        </label>
+        <label>
+            What do you need help with?
+            <textarea rows="4" id="message" placeholder="Describe your current setup and goals..." required></textarea>
+        </label>
+        <button type="submit" class="btn-primary">Submit</button>
+        <p class="footnote">This demo form calls the separate API microservice (POST /api/contact). In production you might push this into a queue or CRM.</p>
+        <p class="footnote" id="form-status"></p>
+    </form>
+</section>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const statusEl = document.getElementById('form-status');
+    statusEl.textContent = 'Submitting...';
+
+    try {
+        const res = await fetch('http://localhost:8081/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                message: document.getElementById('message').value
+            })
+        });
+
+        if (!res.ok) {
+            throw new Error('Request failed');
+        }
+        const data = await res.json();
+        statusEl.textContent = data.message || 'Thanks, your request has been received.';
+        this.reset();
+    } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Something went wrong. Please try again later.';
+    }
+});
+</script>
+{{end}}
+{{template "base" .}}

@@ -1,0 +1,28 @@
+{{define "content"}}
+<section class="hero">
+    <h1>{{if .Profile}}{{.Profile.Tagline}}{{else}}{{.Tagline}}{{end}}</h1>
+    <p class="lead">{{if .Profile}}{{.Profile.Summary}}{{else}}{{.Description}}{{end}}</p>
+    <div class="hero-actions">
+        <a href="/contact" class="btn-primary">Schedule a free 30-min consultation</a>
+        <a href="/services" class="btn-secondary">View services</a>
+    </div>
+    {{if .Profile}}
+    <p class="small-meta">Based in {{.Profile.Location}}</p>
+    <ul class="hero-highlights">
+        {{range .Profile.Technologies}}
+        <li>✔ {{.}}</li>
+        {{end}}
+    </ul>
+    {{end}}
+</section>
+<section class="grid-3">
+    {{range .Services}}
+    <div class="card">
+        <h2>{{.Name}}</h2>
+        <p>{{.Description}}</p>
+        <p class="badge">{{.Category}}</p>
+    </div>
+    {{end}}
+</section>
+{{end}}
+{{template "base" .}}
