@@ -1,0 +1,39 @@
+resources:
+  - ../../base
+
+nameSuffix: -prod
+
+patches:
+  # API service overrides
+  - target:
+      kind: Deployment
+      name: api-service
+    patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: api-service
+      spec:
+        replicas: 3
+        template:
+          spec:
+            containers:
+              - name: api-service
+                image: api:stable
+
+  # WEB service overrides
+  - target:
+      kind: Deployment
+      name: web-service
+    patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: web-service
+      spec:
+        replicas: 3
+        template:
+          spec:
+            containers:
+              - name: web-service
+                image: web:stable
