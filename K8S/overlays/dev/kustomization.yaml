@@ -14,12 +14,12 @@ patches:
       metadata:
         name: api-service
       spec:
-        replicas: 1
+        replicas: 2
         template:
           spec:
             containers:
               - name: api-service
-                image: api:dev
+                image: gowobo/api-service:v1
 
   # WEB service overrides
   - target:
@@ -31,9 +31,9 @@ patches:
       metadata:
         name: web-service
       spec:
-        replicas: 1
+        replicas: 2
         template:
           spec:
             containers:
               - name: web-service
-                image: web:dev
+                image: gowobo/web-service:v1

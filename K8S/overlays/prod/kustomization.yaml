@@ -19,7 +19,7 @@ patches:
           spec:
             containers:
               - name: api-service
-                image: api:stable
+                image: gowobo/api-service:v1
 
   # WEB service overrides
   - target:
@@ -36,4 +36,4 @@ patches:
           spec:
             containers:
               - name: web-service
-                image: web:stable
+                image: gowobo/web-service:v1
