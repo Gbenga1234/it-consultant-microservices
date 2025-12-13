@@ -182,7 +182,7 @@ The `docker-compose.yml` defines two services with the following configuration:
 A Kustomize-based Kubernetes configuration is included for production deployments:
 
 ```bash
-# Dev environment
+# Dev environments
 kubectl apply -k K8S/overlays/dev
 
 # Production environment
